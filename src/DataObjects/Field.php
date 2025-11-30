@@ -26,7 +26,7 @@ final readonly class Field
      *
      * @param  FieldType  $field
      */
-    public static function fromArray(array $field): self
+    public static function fromResponse(array $field): self
     {
         return new self(
             id: $field['id'],

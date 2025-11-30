@@ -19,7 +19,7 @@ it('creates a new field instance', function (): void {
 });
 
 it('creates a new field instance from array', function (): void {
-    $field = Field::fromArray([
+    $field = Field::fromResponse([
         'id' => 1,
         'name' => 'ID',
         'type' => 'number',
