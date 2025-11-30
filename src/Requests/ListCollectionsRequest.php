@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace RashidLaasri\YCODE\Requests;
 
-use Carbon\Carbon;
 use RashidLaasri\YCODE\DataObjects\Collection;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -38,19 +37,6 @@ class ListCollectionsRequest extends Request
         /** @var array<CollectionResponseType> $collections */
         $collections = $response->json('data');
 
-        return array_map([$this, 'map'], $collections);
-    }
-
-    /**
-     * @param  CollectionResponseType  $collection
-     */
-    protected function map(array $collection): Collection
-    {
-        return new Collection(
-            _ycode_id: (string) $collection['_ycode_id'],
-            name: (string) $collection['name'],
-            singular_name: (string) $collection['singular_name'],
-            created_at: Carbon::parse($collection['created_at']),
-        );
+        return array_map(Collection::fromResponse(...), $collections);
     }
 }

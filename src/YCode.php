@@ -10,11 +10,14 @@ use RashidLaasri\YCODE\Resources\ItemResource;
 use RashidLaasri\YCODE\Resources\SiteResource;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
+use Saloon\Http\Request;
 use Saloon\Http\Response;
+use Saloon\PaginationPlugin\Contracts\HasPagination;
+use Saloon\PaginationPlugin\PagedPaginator;
 use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 use Throwable;
 
-class YCode extends Connector
+class YCode extends Connector implements HasPagination
 {
     use AlwaysThrowOnErrors;
 
@@ -38,6 +41,30 @@ class YCode extends Connector
         return new TokenAuthenticator($this->configs->getToken());
     }
 
+    public function paginate(Request $request): PagedPaginator
+    {
+        return new class(connector: $this, request: $request) extends PagedPaginator
+        {
+            protected function isLastPage(Response $response): bool
+            {
+                return is_null($response->json('next_page_url'));
+            }
+
+            protected function getPageItems(Response $response, Request $request): array
+            {
+                return $response->dto();
+            }
+        };
+    }
+
+    public function getRequestException(Response $response, ?Throwable $senderException): YCodeException
+    {
+        return new YCodeException(
+            $senderException?->getMessage() ?? 'Unknown error.',
+            $senderException?->getCode() ?? 0,
+        );
+    }
+
     public function collections(): CollectionResource
     {
         return new CollectionResource($this);
@@ -51,13 +78,5 @@ class YCode extends Connector
     public function sites(): SiteResource
     {
         return new SiteResource($this);
-    }
-
-    public function getRequestException(Response $response, ?Throwable $senderException): YCodeException
-    {
-        return new YCodeException(
-            $senderException?->getMessage() ?? 'Unknown error.',
-            $senderException?->getCode() ?? 0,
-        );
     }
 }

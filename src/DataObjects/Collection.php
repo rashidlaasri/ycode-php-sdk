@@ -26,4 +26,15 @@ final readonly class Collection
         public Carbon $created_at,
         public array $fields = [],
     ) {}
+
+    public static function fromResponse(array $response): self
+    {
+        return new self(
+            _ycode_id: (string) $response['_ycode_id'],
+            name: (string) $response['name'],
+            singular_name: (string) $response['singular_name'],
+            created_at: Carbon::parse($response['created_at']),
+            fields: array_map(Field::fromResponse(...), $response['fields'] ?? []),
+        );
+    }
 }

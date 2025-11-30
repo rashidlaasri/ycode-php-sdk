@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace RashidLaasri\YCODE\Requests;
 
 use RashidLaasri\YCODE\DataObjects\Item;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
-use Saloon\PaginationPlugin\Contracts\Paginatable;
+use Saloon\Traits\Body\HasJsonBody;
 use Saloon\Traits\Plugins\HasTimeout;
 
 /**
@@ -16,15 +17,15 @@ use Saloon\Traits\Plugins\HasTimeout;
  *     _ycode_id: string,
  * }
  */
-class ListItemsRequest extends Request implements Paginatable
+final class CreateItemRequest extends Request implements HasBody
 {
-    use HasTimeout;
+    use HasJsonBody, HasTimeout;
 
     protected Method $method = Method::GET;
 
     public function __construct(
         private readonly string $collectionId,
-        private readonly array $queryParams,
+        private readonly array $payload,
     ) {}
 
     public function resolveEndpoint(): string
@@ -32,19 +33,16 @@ class ListItemsRequest extends Request implements Paginatable
         return "/collections/{$this->collectionId}/items";
     }
 
-    protected function defaultQuery(): array
+    protected function defaultBody(): array
     {
-        return $this->queryParams;
+        return $this->payload;
     }
 
-    /**
-     * @return array<Item>
-     */
-    public function createDtoFromResponse(Response $response): array
+    public function createDtoFromResponse(Response $response): Item
     {
-        /** @var array<ItemResponseType> $items */
-        $items = $response->json('data');
+        /** @var ItemResponseType $item */
+        $item = $response->json('data');
 
-        return array_map(Item::fromResponse(...), $items);
+        return Item::fromResponse($item);
     }
 }
