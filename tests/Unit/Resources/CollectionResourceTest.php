@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use RashidLaasri\YCODE\DataObjects\Collection;
 use RashidLaasri\YCODE\Requests\GetCollectionRequest;
 use RashidLaasri\YCODE\Requests\ListCollectionsRequest;
 use RashidLaasri\YCODE\Resources\CollectionResource;
@@ -18,6 +19,11 @@ it('send a list all collections request', function (): void {
         ->with(Mockery::type(ListCollectionsRequest::class))
         ->andReturn($mockResponse);
 
+    $mockResponse
+        ->shouldReceive('dto')
+        ->once()
+        ->andReturn([]);
+
     (new CollectionResource($mockConnector))->list();
 });
 
@@ -31,6 +37,11 @@ it('send a get collection request', function (): void {
         ->with(Mockery::on(fn($request): bool => $request instanceof GetCollectionRequest
             && $request->resolveEndpoint() === '/collections/637781341a6f7'))
         ->andReturn($mockResponse);
+
+    $mockResponse
+        ->shouldReceive('dto')
+        ->once()
+        ->andReturn((new ReflectionClass(Collection::class))->newInstanceWithoutConstructor());
 
     (new CollectionResource($mockConnector))->get('637781341a6f7');
 });

@@ -7,7 +7,7 @@ use RashidLaasri\YCODE\Resources\SiteResource;
 use RashidLaasri\YCODE\YCode;
 use Saloon\Http\Response;
 
-it('send a publish site request', function (): void {
+it('sends a publish site request', function (): void {
     $mockConnector = Mockery::mock(YCode::class);
     $mockResponse = Mockery::mock(Response::class);
 
@@ -16,6 +16,11 @@ it('send a publish site request', function (): void {
         ->once()
         ->with(Mockery::type(PublishSiteRequest::class))
         ->andReturn($mockResponse);
+
+    $mockResponse
+        ->shouldReceive('dto')
+        ->once()
+        ->andReturn([]);
 
     (new SiteResource($mockConnector))->publish();
 });

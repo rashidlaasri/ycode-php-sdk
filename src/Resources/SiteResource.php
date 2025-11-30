@@ -10,8 +10,8 @@ use Saloon\Http\Response;
 
 final class SiteResource extends BaseResource
 {
-    public function publish(): Response
+    public function publish(): array
     {
-        return $this->connector->send(new PublishSiteRequest);
+        return $this->connector->send(new PublishSiteRequest)->dto();
     }
 }
