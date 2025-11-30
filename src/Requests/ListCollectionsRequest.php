@@ -15,7 +15,13 @@ use Saloon\Traits\Plugins\HasTimeout;
  *     _ycode_id: string,
  *     name: string,
  *     singular_name: string,
- *     created_at: string
+ *     created_at: string,
+ *     fields: array<array{
+ *       id: int,
+ *       name: string,
+ *       type: string,
+ *       default: string|null
+ *     }>
  * }
  */
 class ListCollectionsRequest extends Request

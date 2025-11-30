@@ -22,18 +22,13 @@ final class PublishSiteRequest extends Request
     }
 
     /**
-     * @return array<Domain>
+     * @return Domain[]
      */
     public function createDtoFromResponse(Response $response): array
     {
-        /** @var array<string> $domains */
+        /** @var string[] $domains */
         $domains = $response->json()['domains'];
 
-        return array_map([$this, 'map'], $domains);
-    }
-
-    private function map(string $domain): Domain
-    {
-        return new Domain($domain);
+        return array_map(fn (string $domain): Domain => new Domain($domain), $domains);
     }
 }

@@ -14,7 +14,21 @@ use Saloon\Traits\Plugins\HasTimeout;
 
 /**
  * @phpstan-type ItemResponseType array{
- *     _ycode_id: string,
+ *     "_ycode_id": string|null,
+ *     "ID": int|null,
+ *     "Name": string|null,
+ *     "Slug": string|null,
+ *     "Created date": string|null,
+ *     "Updated date": string|null,
+ *     "Created by": string|null,
+ *     "Updated by": string|null,
+ *     "Summary": string|null,
+ *     "Main Image": string|null,
+ *     "Thumbnail Image": string|null,
+ *     "Featured": bool,
+ *     "Author": string|null,
+ *     "Categories": string[]|null,
+ *     "Body": string|null
  * }
  */
 final class UpdateItemRequest extends Request implements HasBody
@@ -23,6 +37,9 @@ final class UpdateItemRequest extends Request implements HasBody
 
     protected Method $method = Method::PUT;
 
+    /**
+     * @param  array<mixed>  $payload
+     */
     public function __construct(
         private readonly string $collectionId,
         private readonly string $itemId,
@@ -34,6 +51,9 @@ final class UpdateItemRequest extends Request implements HasBody
         return "/collections/{$this->collectionId}/items/{$this->itemId}";
     }
 
+    /**
+     * @return array<mixed>
+     */
     protected function defaultBody(): array
     {
         return $this->payload;

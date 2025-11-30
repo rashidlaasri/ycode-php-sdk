@@ -11,13 +11,22 @@ use Saloon\Http\BaseResource;
 
 final class CollectionResource extends BaseResource
 {
+    /**
+     * @return Collection[]
+     */
     public function list(): array
     {
-        return $this->connector->send(new ListCollectionsRequest)->dto();
+        /** @var Collection[] $response */
+        $response = $this->connector->send(new ListCollectionsRequest)->dto();
+
+        return $response;
     }
 
     public function get(string $id): Collection
     {
-        return $this->connector->send(new GetCollectionRequest($id))->dto();
+        /** @var Collection $response */
+        $response = $this->connector->send(new GetCollectionRequest($id))->dto();
+
+        return $response;
     }
 }
