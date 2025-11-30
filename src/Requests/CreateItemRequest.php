@@ -21,7 +21,7 @@ final class CreateItemRequest extends Request implements HasBody
 {
     use HasJsonBody, HasTimeout;
 
-    protected Method $method = Method::GET;
+    protected Method $method = Method::POST;
 
     public function __construct(
         private readonly string $collectionId,
