@@ -13,9 +13,12 @@ class YCodeServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(YCode::class,
-            fn (): YCode => new YCode(new Config(config('ycode.base_url'), config('ycode.token')))
-        );
+        $this->app->bind(YCode::class, function (): YCode {
+            return new YCode(new Config(
+                config()->string('ycode.base_url'),
+                config()->string('ycode.token')
+            ));
+        });
     }
 
     /**
