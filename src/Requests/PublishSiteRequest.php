@@ -27,7 +27,7 @@ final class PublishSiteRequest extends Request
     public function createDtoFromResponse(Response $response): array
     {
         /** @var string[] $domains */
-        $domains = $response->json()['domains'];
+        $domains = $response->json('domains');
 
         return array_map(fn (string $domain): Domain => new Domain($domain), $domains);
     }

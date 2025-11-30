@@ -4,11 +4,6 @@ declare(strict_types=1);
 
 namespace RashidLaasri\YCODE\DataObjects;
 
-/**
- * @phpstan-type CategoryType array{
- *     name: string,
- * }
- */
 final readonly class Category
 {
     public function __construct(
