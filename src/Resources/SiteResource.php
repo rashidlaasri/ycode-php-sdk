@@ -6,7 +6,6 @@ namespace RashidLaasri\YCODE\Resources;
 
 use RashidLaasri\YCODE\Requests\PublishSiteRequest;
 use Saloon\Http\BaseResource;
-use Saloon\Http\Response;
 
 final class SiteResource extends BaseResource
 {

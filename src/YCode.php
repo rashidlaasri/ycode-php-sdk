@@ -11,7 +11,6 @@ use RashidLaasri\YCODE\Resources\SiteResource;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 use Saloon\Http\Response;
-use Saloon\PaginationPlugin\Contracts\HasPagination;
 use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 use Throwable;
 

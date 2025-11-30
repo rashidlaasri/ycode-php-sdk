@@ -34,7 +34,7 @@ it('send a get collection request', function (): void {
     $mockConnector
         ->shouldReceive('send')
         ->once()
-        ->with(Mockery::on(fn($request): bool => $request instanceof GetCollectionRequest
+        ->with(Mockery::on(fn ($request): bool => $request instanceof GetCollectionRequest
             && $request->resolveEndpoint() === '/collections/637781341a6f7'))
         ->andReturn($mockResponse);
 

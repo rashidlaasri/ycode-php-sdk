@@ -49,7 +49,7 @@ final class GetCollectionRequest extends Request
             name: $collection['name'],
             singular_name: $collection['singular_name'],
             created_at: Carbon::parse($collection['created_at']),
-            fields: array_map(fn(array $field): Field => Field::fromResponse($field), $collection['fields']),
+            fields: array_map(Field::fromResponse(...), $collection['fields']),
         );
     }
 }
