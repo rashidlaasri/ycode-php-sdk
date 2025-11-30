@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RashidLaasri\YCODE;
 
 use RashidLaasri\YCODE\Exceptions\YCodeException;
+use RashidLaasri\YCODE\Pagination\PagedPagination;
 use RashidLaasri\YCODE\Resources\CollectionResource;
 use RashidLaasri\YCODE\Resources\ItemResource;
 use RashidLaasri\YCODE\Resources\SiteResource;
@@ -13,7 +14,7 @@ use Saloon\Http\Connector;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\PaginationPlugin\Contracts\HasPagination;
-use Saloon\PaginationPlugin\PagedPaginator;
+use Saloon\PaginationPlugin\PagedPaginator as SaloonPagedPaginator;
 use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 use Throwable;
 
@@ -41,20 +42,9 @@ class YCode extends Connector implements HasPagination
         return new TokenAuthenticator($this->configs->getToken());
     }
 
-    public function paginate(Request $request): PagedPaginator
+    public function paginate(Request $request): SaloonPagedPaginator
     {
-        return new class(connector: $this, request: $request) extends PagedPaginator
-        {
-            protected function isLastPage(Response $response): bool
-            {
-                return is_null($response->json('next_page_url'));
-            }
-
-            protected function getPageItems(Response $response, Request $request): array
-            {
-                return $response->dto();
-            }
-        };
+        return new PagedPagination($this, $request);
     }
 
     public function getRequestException(Response $response, ?Throwable $senderException): YCodeException

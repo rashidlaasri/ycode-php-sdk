@@ -1,0 +1,22 @@
+[
+    {
+        "_ycode_id": "16687860798456377a79fce481",
+        "ID": 1,
+        "Name": "Blogpost title",
+        "Slug": "blogpost-title",
+        "Created date": "2022-11-18T15:41:19.000Z",
+        "Updated date": "2022-11-18T15:42:03.000Z",
+        "Created by": "1669309481596637fa4299184e",
+        "Updated by": "1669309527456637fa4576f6dc",
+        "Summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ante sapien, hendrerit sed arcu id, egestas viverra turpis. Ut eu massa non erat egestas molestie nec id ligula. Sed mollis.",
+        "Main Image": "https://storage.googleapis.com/ycode-prod-uploads/assets/app11788/images/y5QQoJo4bDfhY89xJEP96zVr3WRaquxmiAD46OSM.jpg",
+        "Thumbnail Image": "https://storage.googleapis.com/ycode-prod-uploads/assets/app11788/images/gJqhOaODnlOKESItkGy9VbIsEM7eOeaNifJO0DZv.jpg",
+        "Featured": 1,
+        "Author": "16687859744696377a736727d8",
+        "Categories": [
+            "1669309639520637fa4c77eea7",
+            "1669309662211637fa4de338d6"
+        ],
+        "Body": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacus purus, semper nec tempor et, tincidunt sed justo....</p>"
+    }
+]
