@@ -36,7 +36,7 @@ class ListItemsRequest extends Request implements Paginatable
     public function createDtoFromResponse(Response $response): array
     {
         /** @var array<ItemResponseType> $items */
-        $items = $response->json()['data'];
+        $items = $response->json('data');
 
         return array_map([$this, 'map'], $items);
     }

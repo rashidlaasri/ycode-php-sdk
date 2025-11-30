@@ -36,7 +36,7 @@ class ListCollectionsRequest extends Request
     public function createDtoFromResponse(Response $response): array
     {
         /** @var array<CollectionResponseType> $collections */
-        $collections = $response->json()['data'];
+        $collections = $response->json('data');
 
         return array_map([$this, 'map'], $collections);
     }

@@ -41,7 +41,7 @@ final class GetCollectionRequest extends Request
     public function createDtoFromResponse(Response $response): Collection
     {
         /** @var CollectionResponseType $collection */
-        $collection = $response->json()['data'];
+        $collection = $response->json('data');
 
         return new Collection(
             _ycode_id: $collection['_ycode_id'],

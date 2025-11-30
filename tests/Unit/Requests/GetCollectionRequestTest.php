@@ -27,6 +27,7 @@ it('returns a collection dto', function (): void {
     $mockResponse
         ->shouldReceive('json')
         ->once()
+        ->with('data')
         ->andReturn(get_fixture('get_collection.json'));
 
     $response = $request->createDtoFromResponse($mockResponse);

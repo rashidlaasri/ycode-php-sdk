@@ -27,6 +27,7 @@ it('returns a list of collections', function (): void {
     $mockResponse
         ->shouldReceive('json')
         ->once()
+        ->with('data')
         ->andReturn(get_fixture('list_collections.json'));
 
     $response = $request->createDtoFromResponse($mockResponse);
