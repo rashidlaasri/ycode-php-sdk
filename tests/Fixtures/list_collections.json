@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "_ycode_id": "637781341a6f7",
+      "name": "Blogposts",
+      "singular_name": "Blogpost",
+      "created_at": "2022-11-18T12:57:24.000Z"
+    },
+    {
+      "_ycode_id": "6377813de3017",
+      "name": "Authors",
+      "singular_name": "Author",
+      "created_at": "2022-11-18T12:57:33.000Z"
+    },
+    {
+      "_ycode_id": 6377850277726,
+      "name": "Categories",
+      "singular_name": "Category",
+      "created_at": "2022-11-18T13:13:38.000Z"
+    }
+  ]
+}

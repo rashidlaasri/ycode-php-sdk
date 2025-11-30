@@ -1,0 +1,57 @@
+<?php
+
+declare(strict_types=1);
+
+namespace RashidLaasri\YCODE;
+
+use RashidLaasri\YCODE\Exceptions\YCodeException;
+use RashidLaasri\YCODE\Resources\CollectionResource;
+use RashidLaasri\YCODE\Resources\SiteResource;
+use Saloon\Http\Auth\TokenAuthenticator;
+use Saloon\Http\Connector;
+use Saloon\Http\Response;
+use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
+use Throwable;
+
+class YCode extends Connector
+{
+    use AlwaysThrowOnErrors;
+
+    public function __construct(private readonly Config $configs) {}
+
+    public function resolveBaseUrl(): string
+    {
+        return $this->configs->getBaseUrl();
+    }
+
+    public function defaultHeaders(): array
+    {
+        return [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+        ];
+    }
+
+    public function collections(): CollectionResource
+    {
+        return new CollectionResource($this);
+    }
+
+    public function sites(): SiteResource
+    {
+        return new SiteResource($this);
+    }
+
+    public function getRequestException(Response $response, ?Throwable $senderException): YCodeException
+    {
+        return new YCodeException(
+            $senderException?->getMessage() ?? 'Unknown error.',
+            $senderException?->getCode() ?? 0,
+        );
+    }
+
+    protected function defaultAuth(): TokenAuthenticator
+    {
+        return new TokenAuthenticator($this->configs->getToken());
+    }
+}
