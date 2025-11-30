@@ -6,10 +6,12 @@ namespace RashidLaasri\YCODE;
 
 use RashidLaasri\YCODE\Exceptions\YCodeException;
 use RashidLaasri\YCODE\Resources\CollectionResource;
+use RashidLaasri\YCODE\Resources\ItemResource;
 use RashidLaasri\YCODE\Resources\SiteResource;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 use Saloon\Http\Response;
+use Saloon\PaginationPlugin\Contracts\HasPagination;
 use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 use Throwable;
 
@@ -32,9 +34,19 @@ class YCode extends Connector
         ];
     }
 
+    protected function defaultAuth(): TokenAuthenticator
+    {
+        return new TokenAuthenticator($this->configs->getToken());
+    }
+
     public function collections(): CollectionResource
     {
         return new CollectionResource($this);
+    }
+
+    public function items(): ItemResource
+    {
+        return new ItemResource($this);
     }
 
     public function sites(): SiteResource
@@ -48,10 +60,5 @@ class YCode extends Connector
             $senderException?->getMessage() ?? 'Unknown error.',
             $senderException?->getCode() ?? 0,
         );
-    }
-
-    protected function defaultAuth(): TokenAuthenticator
-    {
-        return new TokenAuthenticator($this->configs->getToken());
     }
 }
