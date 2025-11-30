@@ -14,7 +14,7 @@ use Saloon\Http\Connector;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 use Saloon\PaginationPlugin\Contracts\HasPagination;
-use Saloon\PaginationPlugin\PagedPaginator as SaloonPagedPaginator;
+use Saloon\PaginationPlugin\PagedPaginator;
 use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 use Throwable;
 
@@ -42,7 +42,7 @@ class YCode extends Connector implements HasPagination
         return new TokenAuthenticator($this->configs->getToken());
     }
 
-    public function paginate(Request $request): SaloonPagedPaginator
+    public function paginate(Request $request): PagedPaginator
     {
         return new PagedPagination($this, $request);
     }
