@@ -6,6 +6,7 @@ namespace RashidLaasri\YCODE\Requests;
 
 use Carbon\Carbon;
 use RashidLaasri\YCODE\DataObjects\Collection;
+use RashidLaasri\YCODE\DataObjects\Field;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
@@ -48,7 +49,7 @@ final class GetCollectionRequest extends Request
             name: $collection['name'],
             singular_name: $collection['singular_name'],
             created_at: Carbon::parse($collection['created_at']),
-            fields: $collection['fields'],
+            fields: array_map(fn(array $field): Field => Field::fromResponse($field), $collection['fields']),
         );
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 use RashidLaasri\YCODE\DataObjects\Collection;
+use RashidLaasri\YCODE\DataObjects\Field;
 use RashidLaasri\YCODE\Requests\GetCollectionRequest;
 use Saloon\Http\Response;
 
@@ -42,9 +43,9 @@ it('returns a collection dto', function (): void {
     expect($response->fields)
         ->toBeArray()
         ->toHaveCount(14)
-        ->and($response->fields)->each->toBeArray()
-        ->and($response->fields[0]['id'])->toBe(1)
-        ->and($response->fields[0]['name'])->toBe('ID')
-        ->and($response->fields[0]['type'])->toBe('number')
-        ->and($response->fields[0]['default'])->toBeNull();
+        ->and($response->fields)->each->toBeInstanceOf(Field::class)
+        ->and($response->fields[0]->id)->toBe(1)
+        ->and($response->fields[0]->name)->toBe('ID')
+        ->and($response->fields[0]->type)->toBe('number')
+        ->and($response->fields[0]->default_value)->toBeNull();
 });
