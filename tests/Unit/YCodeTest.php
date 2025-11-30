@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Mockery;
 use RashidLaasri\YCODE\Config;
 use RashidLaasri\YCODE\Exceptions\YCodeException;
 use RashidLaasri\YCODE\Resources\CollectionResource;
