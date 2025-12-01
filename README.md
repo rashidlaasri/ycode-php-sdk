@@ -8,7 +8,7 @@
 # YCODE PHP SDK
 
 <p>
-    <a href="https://github.com/rashidlaasri/ycode-php-sdk"><img src="https://github.com/rashidlaasri/ycode-php-sdk/workflows/tests.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://github.com/rashidlaasri/ycode-php-sdk"><img src="https://github.com/rashidlaasri/ycode-php-sdk/actions/workflows/tests.yml/badge.svg" alt="Build Status"></a>
     <a href="https://packagist.org/packages/rachidlaasri/ycode-php-sdk"><img src="https://img.shields.io/packagist/v/rachidlaasri/ycode-php-sdk" alt="Latest Stable Version"></a>
     <a href="https://packagist.org/packages/rachidlaasri/ycode-php-sdk"><img src="https://img.shields.io/packagist/l/rachidlaasri/ycode-php-sdk" alt="License"></a>
 </p>
