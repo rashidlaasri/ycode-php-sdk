@@ -15,7 +15,7 @@
 
 This package provides **better API** for working with [YCODE](https://ycode.com) API.
 
-> **Requires [PHP 8.4+](https://php.net/releases/)**
+> **Requires [PHP 8.3+](https://php.net/releases/)**
 
 > **Note:** Please refer to the [official documentation](https://developers.ycode.com/docs/getting-started) for more details.
 
