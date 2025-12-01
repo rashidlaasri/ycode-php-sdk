@@ -26,6 +26,6 @@ class YCodeServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/ycode.php' => config_path('ycode.php'),
-        ]);
+        ], 'ycode-config');
     }
 }
